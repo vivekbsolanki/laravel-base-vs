@@ -7,10 +7,18 @@ use App\User;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::get();       
-        
+        $sortBy = 'id';
+        $orderBy = 'desc';
+        $perPage = 2;
+        $q = null;
+        if($request->has('orderBy')) $orderBy = $request->query('orderBy');
+        if($request->has('sortBy')) $sortBy = $request->query('sortBy');
+        if($request->has('perPage')) $perPage = $request->query('perPage');
+        if($request->has('q')) $q = $request->query('q');
+
+        $users = User::searchScope(new User, $q)->orderBy($sortBy, $orderBy)->paginate($perPage);
         return view('user.index', compact('users'));
     }
 }

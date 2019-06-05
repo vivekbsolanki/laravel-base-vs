@@ -36,4 +36,15 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public static function searchScope($query, $q)
+    {
+        if($q == null) return $query;
+        
+        return $query
+                ->where('name', '=', "%{$q}%")
+                ->orWhere('email', 'LIKE', "%{$q}%")
+                ;
+               
+    }
 }
