@@ -13,7 +13,7 @@ class UserController extends Controller
         $orderBy = 'desc';
         $perPage = 2;
         $q = null;
-        
+            
         if($request->has('orderBy')) $orderBy = $request->query('orderBy');
         if($request->has('sortBy')) $sortBy = $request->query('sortBy');
         if($request->has('perPage')) $perPage = $request->query('perPage');
@@ -22,4 +22,7 @@ class UserController extends Controller
         $users = User::searchScope(new User, $q)->orderBy($sortBy, $orderBy)->paginate($perPage);
         return view('user.index', compact('users'));
     }
+
+
+    
 }

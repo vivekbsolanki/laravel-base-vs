@@ -23,4 +23,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('users/list', 'UserController@list')->name('user.list');
 Route::resource('users', 'UserController');
+Route::resource('products', 'ProductController');
+Route::get('get-data', 'ProductController@getData')->name('get-data');
