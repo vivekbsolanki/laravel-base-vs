@@ -14,7 +14,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('product.listing');
+        $moduleName = 'products';
+        return view('product.listing',compact('moduleName'));
     }
 
     public function getData(Request $request)

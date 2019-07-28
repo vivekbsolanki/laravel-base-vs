@@ -17,10 +17,10 @@
                 <th>Actions</th>
             </thead>
             
-            <tbody>                
+            <tbody>
                 <tr v-for="user in users">
                     <td v-for="field in fields">{{ user[field.name] }}</td>
-                    <td><a href="list/"><i class="fa fa-eye"></i></a></a></td>
+                    <td><a v-bind:href="moduleName+'/'+user.id"><i class="fa fa-eye"></i></a></a></td>
                 </tr>
             </tbody>
         </table>
@@ -45,7 +45,7 @@
 <script>        
     export default {
         template:"#listing-template",
-        // props:['users'],        
+        props:['modulename'],
         data: function(){
             return {
                 fields: [{'name':'id','label':'Id'},
@@ -56,8 +56,12 @@
                 users: [],
                 pagination: [],
                 order: 'asc',
-                sortedColumn: 'id'
+                sortedColumn: 'id',
+                moduleName:'products'
             };
+        },
+        mounted(){
+            console.log('mounted')
         },
         computed: {
             pagesNumber() {                
